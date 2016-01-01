@@ -1,0 +1,223 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(Montserrat-Hairline.otf) format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(Montserrat-UltraLight.otf) format("truetype");
+  font-weight: 150;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(Montserrat-Light.otf) format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(Montserrat-Regular.otf) format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(Montserrat-SemiBold.otf) format("truetype");
+  font-weight: 401;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(Montserrat-Black.otf) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+
+.header {
+	font-family: 'Montserrat';
+	font-weight: 100;
+	font-size: 32px;
+	text-align: center;
+	width: 100%;
+	padding: 16px;
+	border-bottom: 1px solid #e2e2e2;
+	position: fixed;
+	background-color: white;
+	color: #3399cc;
+	-webkit-transition: all 0.75s;
+    -moz-transition: all 0.75s;
+    transition: all 0.75s;
+}
+
+.transition {
+	background-color: #3399cc;
+	color: white;
+	border-bottom: 1px solid #3399cc;
+	-webkit-transition: all 0.75s;
+    -moz-transition: all 0.75s;
+    transition: all 0.75s;
+}
+
+#predict {
+	font-weight: 200;
+}
+
+body {
+	background-color: white;
+	color: #2f2f2f;
+	padding: 0;
+	margin: 0;
+	font-family: 'Montserrat';
+	font-weight: 300;
+}
+
+a {
+	color: #3399cc;
+	-webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+    text-decoration: none
+}
+
+a:hover {
+	color: #336699;
+	-webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+}
+
+h1 {
+	font-size: 16px;
+	color: #3399cc;
+	font-family: 'Montserrat';
+	font-weight: 300;
+	line-height: 50%;
+}
+
+#container {
+	width: 75%;
+	margin: 0 auto;
+	padding-top: 80px;
+}
+
+.prediction {
+	border: 1px solid #3399cc;
+	padding: 20px;
+	width: 100%;
+	margin-bottom: 20px;
+	float: left;
+	box-sizing: border-box;
+}
+
+.title {
+	font-size: 24px;
+	font-family: 'Montserrat';
+	font-weight: 400;
+	line-height: 50%;
+
+}
+
+#prediction_box, #user_box, #sort_box, #description_box {
+	float: left;
+	width: 49%;
+	padding: 20px;
+	margin-bottom: 20px;
+	border: 1px solid #e2e2e2;
+	box-sizing: border-box;
+}
+
+#user_box {
+	float: right;
+}
+
+#sort_box {
+	width: 100%;
+}
+
+.button_main {
+	background-color: #3399cc;
+	-webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+    width: 100%;
+	height: 40px;
+	outline: 0;
+	border: none;
+	color: white;
+	margin-top: 20px;
+	font-family: 'Montserrat';
+	font-weight: 300;
+	font-size: 14px;
+
+}
+
+.button_main:hover {
+	background-color: #336699;
+	-webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+}
+
+.field_main {
+	width: 100%;
+	margin-bottom: 10px;
+	height: 40px;
+	background-color: #e2e2e2;
+	outline: 0;
+	border: none;
+	padding: 10px;
+	box-sizing: border-box;
+	font-family: 'Montserrat';
+	font-weight: 300;
+	font-size: 14px;
+}
+
+.checkbox {
+	margin-left: 150px;
+	margin-top: -32px;
+}
+
+#yellow {
+	border: 1px solid #ffc100;
+}
+
+#red {
+	border: 1px solid #f6402b;
+}
+
+#green {
+	border: 1px solid #88c440;
+}
+
+#pages_box {
+	float: left;
+	width: 100%;
+	border: 1px solid #e2e2e2;
+	padding: 20px;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+}

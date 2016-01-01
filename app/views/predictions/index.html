@@ -1,0 +1,140 @@
+<% if signed_in? %>
+	<div id="prediction_box">
+		<%= form_for @prediction do |f| %>
+			<h1>I predict that</h1>
+			<%= f.text_field :title, class: "field_main" %>
+			<h1>Expires at</h1>
+			<%= f.datetime_field :expire, class: "field_main" %>
+			<%= f.submit "Submit", class: "button_main" %>
+
+		<% end %>
+	</div>
+<% else %>
+	<div id="description_box">
+		<font color="#3399cc">Predictable. </font> For all the times you <i>know</i> you're right.
+		<br><br>
+		<%= form_for @user do |f| %>
+			<h1>Email</h1>
+			<%= f.email_field :email, autofocus: true, class: "field_main" %>
+			<h1>Username</h1>
+			<%= f.email_field :name, class: "field_main" %>
+			<h1>Password</h1>
+			<%= f.password_field :password, autocomplete: "off", class: "field_main" %>
+			<h1>Confirm password</h1>
+			<%= f.password_field :password_confirmation, autocomplete: "off", class: "field_main" %>
+			<%= f.submit "Sign up", class: "button_main" %>
+		<% end %>
+
+	</div>
+<% end %>
+
+<div id="user_box">
+	<% if signed_in? %>
+		Signed in as <font color="#3399cc"><%= current_user.name %></font>
+		<p>
+			<font color="#3399cc"><%= @correct_predictions.count %></font>
+			correct predictions
+		</p>
+		<p>
+			<font color="#3399cc"><%= @correct_supported.count %></font>
+			supported correct predictions
+		</p>
+		<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+	<% else %>
+		Already have an account?
+		<br><br>
+		<%= form_for(:user, :url => session_path(:user)) do |f| %>
+		<h1>Email</h1>
+		<%= f.email_field :email, autofocus: true, class: "field_main" %>
+		<h1>Password</h1>
+		<%= f.password_field :password, autocomplete: "off", class: "field_main" %>
+		<%= f.submit "Log in", class: "button_main" %>
+		<% end %>
+
+	<% end %>	
+</div>
+
+<div id="sort_box">
+	Sort by <%= link_to "new", predictions_path(order: "new") %> | 
+	<%= link_to "supporters", predictions_path(order: "supporters") %> | 
+	<%= link_to "expire date", predictions_path(order: "expire") %>
+</div>
+
+<% @predictions.each do |p| %>
+
+<% yc = p.y_count.to_f %>
+<% nc = p.n_count.to_f %>
+<% total = yc + nc %>
+
+<% perc = 0 %>
+<% if total > 0 %>
+	<% perc = yc / total %>
+<% end %>
+
+<% if p.expire < DateTime.current and total < @vote_thresh %> <div class="prediction" id="yellow">
+<% elsif p.expire < DateTime.current and perc >= @perc_thresh %> <div class="prediction" id="green">
+<% elsif p.expire < DateTime.current %> <div class="prediction" id="red">
+<% else %> <div class="prediction"> <% end %>
+	<p class="author">
+		<i>
+			<% if p.user_id == nil or p.user_id == 0 %>
+				Someone
+			<% else %>
+				<%= User.find_by_id(p.user_id).name %>
+			<% end %>
+		</i>
+		
+		says:
+	</p>
+	<p class="title">
+		<%= p.title %>
+	</p>
+	<p class="expire">
+		<% if p.expire < DateTime.current %>
+			Expired on <%= p.expire.to_date.to_formatted_s(:long_ordinal) %>
+		<% else %>
+			Expires in <%= time_ago_in_words(p.expire) %>
+		<% end %>
+		
+	</p>
+
+	<p class="supporters">
+		<%= p.supporters %> 
+		<% if p.supporters == 1 %>
+			person
+		<% else %>
+			people
+		<% end %>
+
+		<% if p.expire < DateTime.current %>
+			supported this<% if Support.where(user_id: @user_id, prediction_id: p.id).first != nil %>, including you <% end %>
+
+		<% else %>
+			<% if p.supporters == 1 %>
+				supports
+			<% else %>
+				support
+			<% end %>
+			this | 
+			<% if Support.where(user_id: @user_id, prediction_id: p.id).first != nil %>
+				<%= link_to "unsupport", support_path(id: p.id),  method: :delete %>
+			<% else %>
+				<%= link_to "support", new_support_path(id: p.id) %>
+			<% end %>
+		<% end %>
+
+	</p>
+
+	<% if p.expire < DateTime.current %>
+		<p class="vote">
+			<%= p.y_count %> <%= link_to "agree", new_vote_path(id: p.id, agree: true) %>, 
+			<%= p.n_count %> <%= link_to "disagree", new_vote_path(id: p.id, agree: false) %>
+		</p>
+	<% end %>
+</div>
+
+<% end %>
+
+<div id="pages_box">
+	<%= will_paginate @predictions %>
+</div>
