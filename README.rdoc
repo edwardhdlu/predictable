@@ -1,2 +1,3 @@
-Check it out at enigmatic-escarpment-1553.herokuapp.com
-(might be a bit slow to load)
+# Predictable
+
+It's hosted on Heroku [here!](https://enigmatic-escarpment-1553.herokuapp.com/)
